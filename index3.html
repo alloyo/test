@@ -1,0 +1,75 @@
+<style>
+	body{margin:0;padding:0;overflow: hidden;}
+	div{font-size:1px;height:4px;}
+	#main{border:1px solid red;position: relative;height:100px;width:100px;-webkit-transform:rotate(0deg);}
+	.out{1border:1px solid red;width:20px;height:10px;position: absolute;
+		-webkit-transform:rotate(0deg) scale(1.00,1.00);
+		-webkit-transform-origin:250% 10%;
+		background:#eee;
+		border-radius: 5px;
+		overflow: hidden;
+	}
+	.c{width:0px;height:10px;background:#000;border-radius: 5px;position: absolute;top:0;left:0;}
+
+/*	{-moz-transform:rotate(-18deg) scale(1.00,1.00) translate(0px,0px) skew(0deg,0deg);
+	-moz-transform-origin:35% 20%;
+	-webkit-transform:rotate(-18deg) scale(1.00,1.00) translate(0px,0px) skew(0deg,0deg);
+	-webkit-transform-origin:35% 20%;
+	-o-transform:rotate(-18deg) scale(1.00,1.00) translate(0px,0px) skew(0deg,0deg);
+	-o-transform-origin:35% 20%;
+	transform:rotate(-18deg) scale(1.00,1.00) translate(0px,0px) skew(0deg,0deg);
+	transform-origin:35% 20%}*/
+
+</style>
+
+<body>
+
+<div id="main"></div>
+
+
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="./js/js2.js"></script>
+<script type="text/javascript">
+(function(){
+var a =12,b=0,c=a;//parseInt(a/3)
+make("#main",a);
+run("#main",a,b,c);
+function make(selector,n){
+	var a = [];
+	for(var i=0;i<n;i++){
+
+		var deg = i * 360/n;
+		a.push("<div class='out'><div class='c'></div></div>");
+		var b =$(a[i]);
+		b.css({
+			'transform':'rotate('+deg+'deg)',
+	        '-moz-transform':'rotate('+deg+'deg)',
+	    });
+	    $(selector).append(b[0]);
+
+    	$(selector).children().css({"left":$(selector).width()/2,"top":$(selector).height()/2})
+
+	}
+}
+
+
+})();
+ 
+function run(selector,a,b,c){
+	$(selector).children().eq(b).children().width(0).animate({"width":"20px","opacity":1},500,function(){
+		b++;
+		if(b <= a ){
+			$(selector).children().eq(b-c).children().animate({"opacity":0.0},300)
+		}
+		if( b == a){
+			b = 0;
+		}
+		run("#main",a,b,c);
+	});
+}
+
+
+
+
+</script>
+</body>
