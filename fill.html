@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<script type="text/javascript" src="./js/jquery.js"></script>
+<style>
+	body{margin:0;padding:0;}
+	#main{width:310px;}
+</style>
+<script type="text/javascript">
+
+	var h = "";
+	function r(){
+		var w = parseInt(Math.random()*100);
+	//	console.log(w);
+		var a = "box" + w;
+		var b = "<div class='" + a + "'></div>"
+		
+		console.log(a);
+		
+		
+		h += b;
+		console.log(h);
+		$("#main").append(h);
+		$("." + a).css({width:100,height:w,color:"red",border:"1px solid red",float:"left",'font-size':"12px",'line-height':(w/100*0.96)}).html(w);
+	}
+	$(function(){
+		for(var i=0;i<20;i++){
+			// setInterval(function(){r()},100);
+			r();
+		}
+		//setInterval(function(){r()},100);
+	});
+	
+</script>
+</head>
+<body>
+	<div id="main">xxxxx</div>
+</body>
+</html>
