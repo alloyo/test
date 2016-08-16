@@ -1,10 +1,10 @@
 <style>
 	body{margin:0;padding:0;overflow: hidden;}
 	div{font-size:1px;height:4px;}
-	#main{border:1px solid red;position: relative;height:200px;width:200px;-webkit-transform:rotate(0deg);}
+	#main{border:1px solid red;position: relative;height:400px;width:400px;-webkit-transform:rotate(0deg);}
 	.out{1border:1px solid red;width:30px;height:15px;position: absolute;
 		-webkit-transform:rotate(0deg) scale(1.00,1.00);
-		-webkit-transform-origin:150% 50%;
+		-webkit-transform-origin:450% 50%;
 		background:#eee;
 		border-radius: 15px;
 		overflow: hidden;
@@ -21,8 +21,10 @@
 <script type="text/javascript" src="./js/jquery.js"></script>
 <script type="text/javascript" src="./js/js2.js"></script>
 <script type="text/javascript">
+var co = 16;
+var add = 1000;
 (function(){
-var a =12,b=0,c=1;//parseInt(a/3)
+var a =36,b=0,c=1;//parseInt(a/3)
 make("#main",a);
 run("#main",a,b,c);
 function make(selector,n){
@@ -47,8 +49,9 @@ function make(selector,n){
 
 
 function run(selector,a,b,c){
+	var t = 100;
 	var color = ramdomColor();
-	$(selector).children().eq(b).children().animate({"left":"-30px","opacity":1},300,function(){
+	$(selector).children().eq(b).children().animate({"left":"-30px","opacity":1},t,function(){
 		$(this).css({"background":color});
 		var s = "0px 0px 15px " + color,t = "1px solid "+ color ;
 
@@ -56,7 +59,7 @@ function run(selector,a,b,c){
 		b++;
 		if(b <= a ){
 			//$(selector).children().eq(b-c).children().css("left:0px");
-			 $(selector).children().eq(b-c).children().animate({"left":"-0px","opacity":1},300);
+			 $(selector).children().eq(b-c).children().animate({"left":"-0px","opacity":1},t);
 		};
 
 		if( b == a){
@@ -66,13 +69,54 @@ function run(selector,a,b,c){
 	});
 }
 function ramdomColor(){
-	var max = 15,min = 8;
+	
+	
+	var max = 255,min = co;
 	var hex = '';
+	var aa = 0;
+	var r = 16,g = 16,b = 16;
 
-	for(var i = 1;i<=6;i++){
-		var d =  parseInt(Math.random()*(max-min+1)+min,10);
-			hex +=d.toString(16);
+	hex = co.toString(16);
+	console.log(hex.split("").length)
+	if(hex.split("").length  == 2){
+		co += add;
+		hex = "0000" + hex;
 	}
+	if(hex.split("").length  == 3){
+
+		add = add * 1;
+		co += add;
+		hex = "000" + hex;
+	}
+	if(hex.split("").length  == 4){
+		add = add * 2;
+		co += add;
+		hex = "00" + hex;
+	}
+	if(hex.split("").length  == 5){
+		add = add * 3;
+		co += add;
+		hex = "0" + hex;
+	}
+	if(hex.split("").length  == 6){
+		add = add * 4;
+		co += add;
+		hex = "" + hex;
+	}
+	if(hex.split("").length  == 7){
+		add = 255;
+		co = 255;
+	}
+	console.log(add);
+
+
+	//hex = r.toString(16).toString() + g.toString(16).toString() + b.toString(16).toString() ;
+	console.log(hex);
+	// if(co.le
+	// for(var i = 1;i<=6;i++){
+	// 	var d =  parseInt(Math.random()*(max-min+1)+min,10);
+	// 		hex +=d.toString(16);
+	// }
 	return "#" + hex;
 }
 
