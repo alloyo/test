@@ -1,16 +1,17 @@
 <style>
 	body{margin:0;padding:0;overflow: hidden;}
 	div{font-size:1px;height:4px;}
-	#main{border:1px solid red;position: relative;height:200px;width:200px;-webkit-transform:rotate(0deg);}
-	.out{1border:1px solid red;width:30px;height:15px;position: absolute;
+	#main{1border:1px solid red;position: relative;height:400px;width:400px;-webkit-transform:rotate(0deg);}
+
+	.out{1border:1px solid red;width:120px;height:20px;position: absolute;
 		-webkit-transform:rotate(0deg) scale(1.00,1.00);
-		-webkit-transform-origin:150% 50%;
+		-webkit-transform-origin:160% 50%;
 		background:#eee;
 		border-radius: 15px;
 		overflow: hidden;
 		/*box-shadow: 0px 0px 3px red;1*/
 	}
-	.c{width:30px;height:15px;border-radius: 5px;position: absolute;top:0;left:0px;}
+	.c{width:130px;height:25px;border-radius: 20px;position: absolute;top:0;left:0px;}
 </style>
 
 <body>
@@ -21,8 +22,10 @@
 <script type="text/javascript" src="./js/jquery.js"></script>
 <script type="text/javascript" src="./js/js2.js"></script>
 <script type="text/javascript">
+var n = 0;
+var r = 0,g = 0,b = 0;
 (function(){
-var a =12,b=0,c=1;//parseInt(a/3)
+var a =52,b=0,c=1;//parseInt(a/3)
 make("#main",a);
 run("#main",a,b,c);
 function make(selector,n){
@@ -31,14 +34,14 @@ function make(selector,n){
 
 		var deg = i * 360/n;
 		var color = ramdomColor();
-		a.push("<div class='out' style='box-shadow:0px 0px 5px " + color + "'><div class='c' style='background:" + color + ";'></div></div>");
+		a.push("<div class='out' style='box-shadow:0px 0px 15px " + color + "'><div class='c' style='background:" + color + ";'></div></div>");
 		var b =$(a[i]);
 		b.css({
 			'transform':'rotate('+deg+'deg)',
 	        '-moz-transform':'rotate('+deg+'deg)',
 	    });
 	    $(selector).append(b[0]);
-    	$(selector).children().css({"left":0,"top":$(selector).height()/2})
+    	$(selector).children().css({"left":"80px","top":$(selector).height()/2})
 	}
 }
 
@@ -47,16 +50,17 @@ function make(selector,n){
 
 
 function run(selector,a,b,c){
+	var t = 100;
 	var color = ramdomColor();
-	$(selector).children().eq(b).children().animate({"left":"-30px","opacity":1},300,function(){
+	$(selector).children().eq(b).children().animate({"left":"-130px","opacity":1},t,function(){
 		$(this).css({"background":color});
-		var s = "0px 0px 15px " + color,t = "1px solid "+ color ;
+		var s = "0px 0px 15px " + color;
 
 		$(this).parent().css({"box-shadow": s});
 		b++;
 		if(b <= a ){
 			//$(selector).children().eq(b-c).children().css("left:0px");
-			 $(selector).children().eq(b-c).children().animate({"left":"-0px","opacity":1},300);
+			 $(selector).children().eq(b-c).children().animate({"left":"-0px","opacity":1},t);
 		};
 
 		if( b == a){
@@ -66,14 +70,75 @@ function run(selector,a,b,c){
 	});
 }
 function ramdomColor(){
-	var max = 15,min = 8;
-	var hex = '';
+	
+	
+	var max = 255,min = 0;
+	var gab = 50;
 
-	for(var i = 1;i<=6;i++){
-		var d =  parseInt(Math.random()*(max-min+1)+min,10);
-			hex +=d.toString(16);
+	console.log(n);
+	switch(n){
+		case 0:
+			if(r<max){r=r+gab;g=min;b=min}else{n++;}
+			break;
+		case 1:
+			if(g<max){r=max;g=g+gab;b=min}else{n++;}
+			break;
+		case 2:
+			if(b<max){r=max;g=max;b=b+gab}else{n++;}
+			break;
+		case 3:
+			if(r>min){r=r-gab;g=max;b=max;}else{n++;}
+			break;
+		case 4:
+			if(g>min){r=min;g=g-gab;b=max;}else{n++;}
+			break;
+		case 5:
+			if(b>min){r=min;g=min;b=b-gab;}else{n++;}
+			break;
+		case 6:
+			if(b<max){r=r+gab;g=g+gab;b=b+gab;}else{n++;}
+			break;
+		case 7:
+			if(g>min){r=max;g=g-gab;b=max;}else{n++;}
+			break;
+		case 8:
+			if(b>min){r=max;g=min;b=b-gab;}else{n++;}
+			break;
+		case 9:
+			if(r>min){r=r-gab;g=min;b=min;}else{n++;}
+			break;
+		case 10:
+			if(r<max){r=r+gab;g=min;b=b+gab;}else{n++;}
+			break;
+		case 11:
+			if(r>min){r=r-gab;g=g+gab;b=b-gab;}else{n++;}
+			break;
+		case 12:
+			if(g>min){r=min;g=g-gab;b=min;}else{n++;}
+			break;
+		case 13:
+			if(g<max){r=min;g=g+gab;b=b+gab;}else{n++;}
+			break;
+		case 14:
+			if(g>min){r=min;g=g-gab;b=max;}else{n++;}
+			break;
+		case 15:
+			if(b>min){r=min;g=min;b=b-gab;}else{n = min;}
+			break;
 	}
-	return "#" + hex;
+
+
+
+
+	//hex = r.toString(16).toString() + g.toString(16).toString() + b.toString(16).toString() ;
+
+	// if(co.le
+	// for(var i = 1;i<=6;i++){
+	// 	var d =  parseInt(Math.random()*(max-min+1)+min,10);
+	// 		hex +=d.toString(16);
+	// }
+
+	return "rgb("+ r +","+ g +","+ b +")" ;
 }
 
 
