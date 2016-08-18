@@ -25,7 +25,7 @@
 var n = 0;
 var r = 0,g = 0,b = 0;
 (function(){
-var a =52,b=0,c=1;//parseInt(a/3)
+var a =99,b=0,c=1;//parseInt(a/3)
 make("#main",a);
 run("#main",a,b,c);
 function make(selector,n){
@@ -50,7 +50,7 @@ function make(selector,n){
 
 
 function run(selector,a,b,c){
-	var t = 100;
+	var t = 1;
 	var color = ramdomColor();
 	$(selector).children().eq(b).children().animate({"left":"-130px","opacity":1},t,function(){
 		$(this).css({"background":color});
@@ -73,7 +73,7 @@ function ramdomColor(){
 	
 	
 	var max = 255,min = 0;
-	var gab = 50;
+	var gab = 10;
 
 	console.log(n);
 	switch(n){
