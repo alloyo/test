@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+	html{font-size: 67.5%;}
+	body{margin:0;padding:0;overflow: hidden;}
+	div{font-size:1px;height:4px;}
+	#main{1border:1px solid red;position: relative;height:400px;width:400px;-webkit-transform:rotate(0deg);}
+
+	.out{1border:1px solid red;width:10px;height:3px;position: absolute;
+		-webkit-transform:rotate(0deg) scale(1.00,1.00);
+		-webkit-transform-origin:360% 50%;
+		background:#eee;
+		border-radius: 15px;
+		overflow: hidden;
+		/*box-shadow: 0px 0px 3px red;1*/
+	}
+	.c{width:10px;height:3px;border-radius: 20px;position: absolute;top:0;left:0px;}
+</style>
+</head>
+<body>
+
+<div id="main"></div>
+
+
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="./js/js2.js"></script>
+<script type="text/javascript">
+var n = 0;
+var r = 0,g = 0,b = 0;
+(function(){
+var a =52,b=0,c=1;//parseInt(a/3)
+make("#main",a);
+run("#main",a,b,c);
+function make(selector,n){
+	var a = [];
+	for(var i=0;i<n;i++){
+
+		var deg = i * 360/n;
+		var color = ramdomColor();
+		a.push("<div class='out' style='box-shadow:0px 0px 15px " + color + "'><div class='c' style='background:" + color + ";'></div></div>");
+		var b =$(a[i]);
+		b.css({
+			'transform':'rotate('+deg+'deg)',
+	        '-moz-transform':'rotate('+deg+'deg)',
+	    });
+	    $(selector).append(b[0]);
+    	$(selector).children().css({"left":"80px","top":$(selector).height()/2})
+	}
+}
+
+
+})();
+
+
+function run(selector,a,b,c){
+	var t = 100;
+	var color = ramdomColor();
+	$(selector).children().eq(b).children().animate({"left":"-130px","opacity":1},t,function(){
+		$(this).css({"background":color});
+		var s = "0px 0px 15px " + color;
+
+		$(this).parent().css({"box-shadow": s});
+		b++;
+		if(b <= a ){
+			//$(selector).children().eq(b-c).children().css("left:0px");
+			 $(selector).children().eq(b-c).children().animate({"left":"-0px","opacity":1},t);
+		};
+
+		if( b == a){
+			b = 0;
+		};
+		run("#main",a,b,c);
+	});
+}
+function ramdomColor(){
+	
+	
+	var max = 255,min = 0;
+	var gab = 50;
+
+	console.log(n);
+	switch(n){
+		case 0:
+			if(r<max){r=r+gab;g=min;b=min}else{n++;}
+			break;
+		case 1:
+			if(g<max){r=max;g=g+gab;b=min}else{n++;}
+			break;
+		case 2:
+			if(b<max){r=max;g=max;b=b+gab}else{n++;}
+			break;
+		case 3:
+			if(r>min){r=r-gab;g=max;b=max;}else{n++;}
+			break;
+		case 4:
+			if(g>min){r=min;g=g-gab;b=max;}else{n++;}
+			break;
+		case 5:
+			if(b>min){r=min;g=min;b=b-gab;}else{n++;}
+			break;
+		case 6:
+			if(b<max){r=r+gab;g=g+gab;b=b+gab;}else{n++;}
+			break;
+		case 7:
+			if(g>min){r=max;g=g-gab;b=max;}else{n++;}
+			break;
+		case 8:
+			if(b>min){r=max;g=min;b=b-gab;}else{n++;}
+			break;
+		case 9:
+			if(r>min){r=r-gab;g=min;b=min;}else{n++;}
+			break;
+		case 10:
+			if(r<max){r=r+gab;g=min;b=b+gab;}else{n++;}
+			break;
+		case 11:
+			if(r>min){r=r-gab;g=g+gab;b=b-gab;}else{n++;}
+			break;
+		case 12:
+			if(g>min){r=min;g=g-gab;b=min;}else{n++;}
+			break;
+		case 13:
+			if(g<max){r=min;g=g+gab;b=b+gab;}else{n++;}
+			break;
+		case 14:
+			if(g>min){r=min;g=g-gab;b=max;}else{n++;}
+			break;
+		case 15:
+			if(b>min){r=min;g=min;b=b-gab;}else{n = min;}
+			break;
+	}
+
+
+
+
+	//hex = r.toString(16).toString() + g.toString(16).toString() + b.toString(16).toString() ;
+
+	// if(co.le
+	// for(var i = 1;i<=6;i++){
+	// 	var d =  parseInt(Math.random()*(max-min+1)+min,10);
+	// 		hex +=d.toString(16);
+	// }
+
+	return "rgb("+ r +","+ g +","+ b +")" ;
+}
+
+
+</script>
+</body>
+
+</html>
